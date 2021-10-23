@@ -1,15 +1,16 @@
 ### Use Cases
 
 **UC1 Lead Generation**
+
 System generates a lead A lead is generated when Transactional Customer purchases a meal
 
-**UC2: User register **
+**UC2: User register**
 
 1. Lead conversion : User registers via invitation after purchases a meal 
 2. User registers via invitation because of a marketing campaign 
 3. User registers via invitation from local authority Once a user register in the system the user is called Engaged Customer
 
-**UC3: Engaged Customer set sharing level **
+**UC3: Engaged Customer set sharing level**
 After registration is completed the Engaged Customer can set sharing level 
 - Level 1: User-name only and avatar 
 - Level 2: Level 1 + Full name, basic contact info and picture 
@@ -17,7 +18,7 @@ After registration is completed the Engaged Customer can set sharing level
 - Level 4: Level 3 + interaction
 - Level 5: Level 4 + health data
 
-**UC4: Engaged Customer Views feed **
+**UC4: Engaged Customer Views feed**
 An Engaged Customer can view feed which contains: 
 - Shared content/Posts/Interactions from other Engaged Customer 
 - Shared content/Posts/Interactions from Support Community 
@@ -26,13 +27,13 @@ An Engaged Customer can view feed which contains:
 
 Note the content is rich text with interactive content such as videos , animations , pools etc.
 
-**UC5: Engaged Customer Interact with feed **
+**UC5: Engaged Customer Interact with feed**
 An Engaged Customer can re-share content from feed, comment, and like and its derivatives
 
-**UC6: Engaged Customer socialize with other Engaged Customer ** 
+**UC6: Engaged Customer socialize with other Engaged Customer** 
 Engaged Customer can add or block other Engaged Customer Engaged Customer can message, video chat with other Engaged Customer
 
-**UC7: Engaged Customer socialize with Community **
+**UC7: Engaged Customer socialize with Community**
 Engaged Customer can join a Community based on access level set by the Community: a) Public, anyone can join b) Private, requires invite or approval to join
 
 **UC8: Engaged Customer interact with Dietician**
