@@ -80,3 +80,14 @@ Based on Engaged Customer online behavior the system will reward the Engaged Cus
 - Number of interactions (curation post, likes, answers, etc) similar to StackOverflow 
 - Shares and referrals of other members
 - Producing content to promote Pharmacy Foods (writing online posts, public speaking, etc)
+
+**UC:14 Dietician Access Engaged Customer Profile**
+
+- Dietician can access Engaged Customer health records via EMR
+- Dietician can access Engaged Customer Social Profile
+
+**UC:15 Dietician Modify Engaged Customer Profile**
+
+- Dietician can modify Engaged Customer health records via EMR. All changes are tracked. 
+- Dietician can **not** modify Engaged Customer Social Profile
+
