@@ -6,7 +6,7 @@ System generates a lead, a lead is generated when Transactional Customer purchas
 
 **UC2: User register**
 
-- Lead conversion : User registers via invitation after purchases a meal 
+- Lead conversion : User (Transactional Customer) registers via invitation after purchases a meal 
 - User registers via invitation because of a marketing campaign 
 - User registers via invitation from local authority 
 
