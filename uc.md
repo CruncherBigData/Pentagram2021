@@ -9,6 +9,7 @@ System generates a lead, a lead is generated when Transactional Customer purchas
 - Lead conversion : User registers via invitation after purchases a meal 
 - User registers via invitation because of a marketing campaign 
 - User registers via invitation from local authority 
+
 Once a user register in the system the user is called Engaged Customer
 
 **UC3: Engaged Customer set sharing level**
