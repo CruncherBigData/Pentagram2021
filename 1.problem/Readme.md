@@ -1,4 +1,4 @@
-### Use Cases
+## Use Cases (UC)
 
 **UC1 Lead Generation**
 
