@@ -2,7 +2,7 @@
 
 **UC1 Lead Generation**
 
-System generates a lead A lead is generated when Transactional Customer purchases a meal
+System generates a lead, a lead is generated when Transactional Customer purchases a meal
 
 **UC2: User register**
 
