@@ -1,5 +1,5 @@
 
-## Business Problem ansd Requirements
+## Business Problem and Requirements
 Farmacy Family is an enhancement of the existing Farmacy Foods system that adds tighter engagement with their customers.
 
 The overall goal of Farmacy Family is to connect, gather, analyze, and communicate.
