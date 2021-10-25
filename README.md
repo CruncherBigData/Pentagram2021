@@ -29,7 +29,7 @@ Its the fastest friendship we have ever made, just a week ago we did not know ea
 	- [Business Problem](problem/business-problem.md)
 	- Assumptions
 	- Actors
-	- Use Cases
+	- [Use Cases](problem/usecases.md)
 	- [Quality Attribute Scenarios](problem/qas.md)
 	- Constraints
 - [Solution](/2.solution/Readme.md)
