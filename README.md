@@ -1,7 +1,11 @@
 
 # Architectural Katas 2021 - Team Pentagram2021
 
-This is the fastest friendship we have ever made, just a week ago we did not know each others and now we are 100% into this project. Just five passionate guys about software architecture.
+Hello Everyone! **`Pentagram2021`** is a group of humbeled engineers whose passion is to build a better, reliable and affordable software with sound guiding architectural principles, style and design.
+
+The name Pentagram is the shape of a five-pointed star polygon and we as a member of 5 engineers, its no brainer that we picked this name. We are excited and thrilled to share our solution with the team.
+
+Its the fastest friendship we have ever made, just a week ago we did not know each others and now we are 100% into this project. Just five passionate guys about software architecture.
 
 ### Members
 - Ajay Sreehari: [LinkedIn](https://www.linkedin.com/in/ajaysreehari/)
@@ -20,12 +24,13 @@ This is the fastest friendship we have ever made, just a week ago we did not kno
 
 ## Table of Content
 - [Introduction](introduction.md)	
-- [Use Case Analysis](/1.problem/Readme.md)
-	- Business Problem
+- [Glossary](glossary.md)
+- [Use Case Analysis](problem/Readme.md)
+	- [Business Problem](problem/business-problem.md)
 	- Assumptions
 	- Actors
-	- Use Cases
-	- Quality Attribute Scenarios
+	- [Use Cases](problem/usecases.md)
+	- [Quality Attribute Scenarios](problem/qas.md)
 	- Constraints
 - [Solution](/2.solution/Readme.md)
 	- Design Purpose
