@@ -25,7 +25,7 @@ Its the fastest friendship we have ever made, just a week ago we did not know ea
 ## Table of Content
 - [Introduction](introduction.md)	
 - [Glossary](glossary.md)
-- [Use Case Analysis](problem/Readme.md)
+- [Use Case Analysis](problem/usecases.md)
 	- [Business Problem](problem/business-problem.md)
 	- Assumptions
 	- Actors
