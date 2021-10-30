@@ -32,10 +32,10 @@ Its the fastest friendship we have ever made, just a week ago we did not know ea
 	- [Use Cases](problem/usecases.md)
 	- [Quality Attribute Scenarios](problem/qas.md)
 	- Constraints
-- [Solution](/solution/Readme.md)
-	- [Solution Overview](/solution/solutionOverview.md)
-	- [Tradeoffs](/solution/tradeoffs.md)
-	- [ADR's](/solution/adrs.md)
+- [Solution](solution/Readme.md)
+	- [Solution Overview](solution/solutionOverview.md)
+	- [Tradeoffs](solution/tradeoffs.md)
+	- [ADR's](solution/adrs.md)
 - [Views](/3.views/Readme.md)
 	- Sequence Diagrams
 	- Data Models
