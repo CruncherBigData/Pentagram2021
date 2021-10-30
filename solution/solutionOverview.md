@@ -28,21 +28,30 @@ Below are the details of the systems/users involved in the landscape diagram.
 
 - Dietitianist: Dieticians that recommedns dietry needs/changes for Farmacy Family Customer.
 
-- Payment Gateway: It is a third-party payment service provider. SysOps system interact with Payment Gateway
-to process customer annual feet
-
-- Notification System: It is the software system which is used to send notifications SMS or Email
+- Notification System: It is the software system which is used to send notifications Push, SMS or Email
 to customers and experts.
+
+- Farmacy Food System - An existuing system that helps uscotmer to purchase meals and treat their medical problems using Food.
+
+- Farmacy Family System - The new system we are going to build that helps existing Farmacy customers to be more engaged, get better knowledge about different health issues and hosw to treat their condition and at same time allow them to connect with Medical providers and dieticians to get etter insights and food recommendations.
+
+- eDietition System - System that allows expert dietitionist to recommend different type of foods based on customer needs.
+
+- Medical System - System that allows medical providers to work with engaged customers to do testing, run analutics and make recommendsations.
+
+- CMS System - Content Management System that allows different types of engagement models (wellness programs, forums etc.) for engaged customer.
+
+- Analytics System - Analytics System gather engaged customer test results from medical provider system, rely on the customer profile and perform analysis based out of ML model to recommend changes in the type of food for customers.
 
 <hr/>
 
 #### **System Context Diagram**
 ![](../images/structurizr-SystemContext-001.png)
 ![](../images/structurizr-SystemContext-key.png)
-C4-L1 System Context Diagram is the top-level diagram  of SysOp Squad System and is also the most abstract. It shows the big picture, how different users interact with the SysOp Squad System as a whole, and how the System fits together with other existing software systems
+C4-L1 System Context Diagram is the top-level diagram  of the Famacy Family System and is also the most abstract. It shows the big picture, how different users & systems interact with the Farmacy Family System as a whole, and how the System fits together with other existing software systems.
 
-Below are the external users who interact with the system
+All the users & systems details alreaqdy listed above.
 
 <hr/>
 
-#### System Container Diagram
+#### **System Container Diagram**
