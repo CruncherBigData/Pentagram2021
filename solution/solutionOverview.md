@@ -54,4 +54,26 @@ All the users & systems details alreaqdy listed above.
 
 <hr/>
 
-#### **System Container Diagram**
+#### **Analytics System Container Diagram**
+![](../images/structurizr-Containers-datalake.png)
+![](../images/structurizr-Containers-key-datalake.png)
+It is the intenral view of how we think Farmacy Data Lake plarform will look like. Its not different than a typical data lake platform and we will be using AWS Data Lake platform to builkd it out. Following definitions of different components inside the analytics platform.
+- Data Sources
+    - different sources will publish domain events.
+        - Farmacy Food System
+        - Farmacy Family
+        - Medical System (sending engaged customer medical results)
+        - eDietition System (send food recommendations)
+- Event Bus
+    - We will be using Kafka for capturing events 
+- Data Ingestion
+- Data Lake Store
+- Machine Learning Training
+- Machine Learning Model Store
+- Analytics Processor
+    - Process data by running models and returns recommendastion back to the caller.
+        - Gegraphical Food Recommendation
+
+<hr/>
+
+#### **Farmacy Family System Container Diagram**
