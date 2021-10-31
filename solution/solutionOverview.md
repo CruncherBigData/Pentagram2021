@@ -50,7 +50,7 @@ to customers and experts.
 ![](../images/structurizr-SystemContext-key.png)
 C4-L1 System Context Diagram is the top-level diagram  of the Famacy Family System and is also the most abstract. It shows the big picture, how different users & systems interact with the Farmacy Family System as a whole, and how the System fits together with other existing software systems.
 
-All the users & systems details alreaqdy listed above.
+All the users & systems details already listed above.
 
 <hr/>
 
