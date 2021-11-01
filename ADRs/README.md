@@ -1,0 +1,5 @@
+- [ADR_01: A dedicated user activation service subscribing to purchase events from Farmacy Foods](ADR001-dedicated-user-activation-service.md)
+- [ADR_002: Integrate with Epic EHR/EMR API to pull Farmacy Family EMR data](ADR002-integrate-with-epic-ehr_emr.md)
+- [ADR 003: Use Service-Based Architecture Style](ADR003-UsTheService-basedArchitectureStyle.md)
+- [ADR 004: Deployment Topology](ADR004-deployment-topology.md)
+- [ADR 005: Analytics System](ADR005-analytics-system.md)

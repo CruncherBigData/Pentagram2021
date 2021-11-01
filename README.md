@@ -32,12 +32,10 @@ Its the fastest friendship we have ever made, just a week ago we did not know ea
 	- [Use Cases](problem/usecases.md)
 	- [Quality Attribute Scenarios](problem/qas.md)
 	- Constraints
-- [Solution](/2.solution/Readme.md)
-	- Design Purpose
-	- Primary Functional Requirements
-	- Ranking of the Quality Attribute Scenarios
-	- Tradeoffs 
-	- ADR's
+- [Solution](solution/README.md)
+	- [Solution Overview](solution/solutionOverview.md)
+	- [Tradeoffs](solution/tradeoffs.md)
+	- [ADR's](solution/adrs.md)
 - [Views](/3.views/Readme.md)
 	- Sequence Diagrams
 	- Data Models
