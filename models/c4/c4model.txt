@@ -14,9 +14,17 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
             farmacyFoodSystem = softwaresystem "Farmacy Foods System" "Existing farmacy Foods system that provides meals/foods for their customers, make sure right food is available near to customers fridges etc., etc." "Existing System"
             notificationSystem = softwaresystem "Notification System" "Notification capability allows different types of notificatios to be sent out like Email, SMS, Push etc." "Existing System"
             eDietitionSystem = softwaresystem "eDietition System" "System that allows expert dietitionist to recommend different type of foods based on customer needs." "Existing System"
-            medicalSystem = softwaresystem "Medical Provider System" "System that allows medical providers to work with engaged customers to do testing, run analutics and make recommendsations." "Existing System"
+            medicalSystem = softwaresystem "Medical System" "System that allows medical providers to work with engaged customers to do testing, run analutics and make recommendsations." "Existing System"
             cmsSystem = softwaresystem "CMS System" "Content Management System that allows different types of engagement models (wellness programs, forums etc.) for engaged customer." "CMS System"
-            analyticsSystem = softwaresystem "Analytics System" "Analytics System gather engaged customer test results from medical provider system, rely on the customer profile and perform analysis based out of ML model to recommend changes in the type of food for customers." "Analytics System"
+            analyticsSystem = softwaresystem "Analytics System" "Analytics System gather engaged customer test results from medical provider system, rely on the customer profile and perform analysis based out of ML model to recommend changes in the type of food for customers." "Farmacy Data Lake" {
+                    dataSources = container "Data Sources" "Source systems publish Domian events." "Data Sources"
+                    evetnBus = container "Event Bus" "Event Bus responsible to capture all events." "Data Sources"
+                    dataIngestion = container "Data Ingestion" "Raw data ingested for further processing." "Data Ingestion"
+                    dataLakeStore = container "Data Lake Store" "Data Lake Store Schema" "Data Lake Store"
+                    mlTrainer = container "Machine Learning Training" "" "Machine Learning Training"
+                    mlModelStore = container "Machine Learning Model Store" "" "Machine Learning Model Storage"
+                    analyticProcessor = container "Analytics Processor" "Analytics Processor using ML Models" "Analytics Processor"
+            }
 
             farmacyFamilySystem = softwaresystem "Farmacy Family System" "Allows engaged customers to collaborate, learn about wellness of their health and access medical providers as well as dieticiantist to provide overall good food recommendations." {
                 singlePageApplication = container "Single-Page Application" "Provides all of the Internet banking functionality to customers via their web browser." "JavaScript and Angular" "Web Browser"
@@ -32,6 +40,7 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
                 }
                 database = container "Database" "Stores user registration information, hashed authentication credentials, access logs, etc." "Oracle Database Schema" "Database"
             }
+            
         }
 
         # relationships between people and software systems
@@ -50,6 +59,15 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
         farmacyFamilySystem -> cmsSystem "Integrastes for different engagement models (Wellness Programs, Seminars, Forums etc.)."
         analyticsSystem -> medicalSystem "Gather Engaged Customer test results"
         farmacyFamilySystem -> analyticsSystem "Get Engaged Customers recommendations based out of analytics"
+        
+        # relationships for Data Lake Platform
+        dataSources -> evetnBus "Data Sources capture domain events and publish to Event Bus"
+        evetnBus -> dataIngestion "Event Bus ingest raw data"
+        dataIngestion -> dataLakeStore "Raw data (structured & unstructured) gets stored in the data lake store"
+        mlTrainer -> dataLakeStore "Machine Learning gets data periodically, learn from it and generates model"
+        mlTrainer -> mlModelStore "ML models gets stored in the ML Storage"
+        analyticProcessor -> mlModelStore "Analytucs Processor gets input from request and generates analytics using ML models"
+        
     }
 
     views {
@@ -65,6 +83,15 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
             }
             autoLayout
         }
+        
+        container analyticsSystem "Containers" {
+            include *
+            animation {
+                dataSources
+                evetnBus
+            }
+            autoLayout
+        }        
 
 
         styles {
