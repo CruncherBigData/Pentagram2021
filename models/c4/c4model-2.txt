@@ -1,0 +1,149 @@
+/*
+ * Farmacy Family System View
+*/
+workspace "Farmacy Family System" "Farmacy Family System View." {
+
+    model {
+        customer = person "Farmacy Family Customer" "An engaged customer of the Farmacy system, where they can get collaboration opportunities." "Customer"
+        farmacyFoodCustomer = person "Farmacy Food Customer" "Customer that places transition to buy meals." "Transactional Customer"
+        medicalProvider = person "Medical provider" "Medical providers like Nurses/Doctors" "Medical Provider for Clinics"
+        dietician = person "Dietician" "Dieticians that recommedns dietry needs/changes for Farmacy Family Customer" "Dietitianist"            
+
+        enterprise "Farmacy Family System" {
+
+            farmacyFoodSystem = softwaresystem "Farmacy Foods System" "Existing farmacy Foods system that provides meals/foods for their customers, make sure right food is available near to customers fridges etc., etc." "Existing System"
+            notificationSystem = softwaresystem "Notification System" "Notification capability allows different types of notificatios to be sent out like Email, SMS, Push etc." "Existing System"
+            eDietitionSystem = softwaresystem "eDietition System" "System that allows expert dietitionist to recommend different type of foods based on customer needs." "Existing System"
+            medicalSystem = softwaresystem "Medical System" "System that allows medical providers to work with engaged customers to do testing, run analutics and make recommendsations." "Existing System"
+            cmsSystem = softwaresystem "CMS System" "Content Management System that allows different types of engagement models (wellness programs, forums etc.) for engaged customer." "CMS System"
+            analyticsSystem = softwaresystem "Analytics System" "Analytics System gather engaged customer test results from medical provider system, rely on the customer profile and perform analysis based out of ML model to recommend changes in the type of food for customers." "Farmacy Data Lake" {
+                    dataSources = container "Data Sources" "Source systems publish Domian events." "Data Sources"
+                    evetnBus = container "Event Bus" "Event Bus responsible to capture all events." "Data Sources"
+                    dataIngestion = container "Data Ingestion" "Raw data ingested for further processing." "Data Ingestion"
+                    dataLakeStore = container "Data Lake Store" "Data Lake Store Schema" "Data Lake Store"
+                    mlTrainer = container "Machine Learning Training" "" "Machine Learning Training"
+                    mlModelStore = container "Machine Learning Model Store" "" "Machine Learning Model Storage"
+                    analyticProcessor = container "Analytics Processor" "Analytics Processor using ML Models" "Analytics Processor"
+            }
+
+            farmacyFamilySystem = softwaresystem "Farmacy Family System" "Allows engaged customers to collaborate, learn about wellness of their health and access medical providers as well as dieticiantist to provide overall good food recommendations." {
+                singlePageApplication = container "Single-Page Application" "Provides all of the Internet banking functionality to customers via their web browser." "JavaScript and Angular" "Web Browser"
+                mobileApp = container "Mobile App" "Provides a limited subset of the Internet banking functionality to customers via their mobile device." "Xamarin" "Mobile App"
+                webApplication = container "Web Application" "Delivers the static content and the Internet banking single page application." "Java and Spring MVC"
+                apiApplication = container "API Application" "Provides Internet banking functionality via a JSON/HTTPS API." "Java and Spring MVC" {
+                    signinController = component "Sign In Controller" "Allows users to sign in to the Internet Banking System." "Spring MVC Rest Controller"
+                    accountsSummaryController = component "Accounts Summary Controller" "Provides customers with a summary of their bank accounts." "Spring MVC Rest Controller"
+                    resetPasswordController = component "Reset Password Controller" "Allows users to reset their passwords with a single use URL." "Spring MVC Rest Controller"
+                    securityComponent = component "Security Component" "Provides functionality related to signing in, changing passwords, etc." "Spring Bean"
+                    mainframeBankingSystemFacade = component "Mainframe Banking System Facade" "A facade onto the mainframe banking system." "Spring Bean"
+                    emailComponent = component "E-mail Component" "Sends e-mails to users." "Spring Bean"
+                }
+                database = container "Database" "Stores user registration information, hashed authentication credentials, access logs, etc." "Oracle Database Schema" "Database"
+            }
+            
+        }
+
+        # relationships between people and software systems
+        customer -> farmacyFamilySystem "Access Clinics/eDietician platforms, collaborate with other users and access wellness programs"
+        farmacyFamilySystem -> farmacyFoodSystem "Access Transactional Customer Data"
+        farmacyFoodSystem -> farmacyFamilySystem "Access Engaged Customer Data"
+        farmacyFamilySystem -> notificationSystem "Sends Notifications"
+        notificationSystem -> customer "Sends Notifications to"
+        notificationSystem -> farmacyFoodCustomer "Sends Notifications to"
+        farmacyFoodCustomer -> farmacyFoodSystem "Purchase Meals etc."
+        farmacyFamilySystem -> eDietitionSystem "Engaged Customers access dietition system and engage with their dietitionists"
+        dietician -> eDietitionSystem "Gives dietry recommendation based on customer medical needs."
+        dietician -> farmacyFamilySystem "Access customer profile to use it for dietry recommendation."
+        medicalProvider -> medicalSystem "Access Customer Medical record"
+        customer -> medicalProvider "get Access to Medical System for appointment, testing etc."
+        farmacyFamilySystem -> cmsSystem "Integrastes for different engagement models (Wellness Programs, Seminars, Forums etc.)."
+        analyticsSystem -> medicalSystem "Gather Engaged Customer test results"
+        farmacyFamilySystem -> analyticsSystem "Get Engaged Customers recommendations based out of analytics"
+        
+        # relationships for Data Lake Platform
+        dataSources -> evetnBus "Data Sources capture domain events and publish to Event Bus"
+        evetnBus -> dataIngestion "Event Bus ingest raw data"
+        dataIngestion -> dataLakeStore "Raw data (structured & unstructured) gets stored in the data lake store"
+        mlTrainer -> dataLakeStore "Machine Learning gets data periodically, learn from it and generates model"
+        mlTrainer -> mlModelStore "ML models gets stored in the ML Storage"
+        analyticProcessor -> mlModelStore "Analytucs Processor gets input from request and generates analytics using ML models"
+        
+    }
+
+    views {
+        systemlandscape "SystemLandscape" {
+            include *
+            autoLayout
+        }
+
+        systemcontext farmacyFamilySystem "SystemContext" {
+            include *
+            animation {
+                farmacyFamilySystem
+            }
+            autoLayout
+        }
+        
+        container analyticsSystem "Containers" {
+            include *
+            animation {
+                dataSources
+                evetnBus
+            }
+            autoLayout
+        }        
+
+
+        styles {
+            element "Person" {
+                color #ffffff
+                fontSize 22
+                shape Person
+            }
+            element "Customer" {
+                background #08427b
+            }
+            element "Transactional Customer" {
+                background #568760
+            }
+            element "Medical Provider for Clinics" {
+                background #568760
+            }
+            element "Dietitianist" {
+                background #568760
+            }            
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Existing System" {
+                background #768479
+                color #ffffff
+            }
+            element "CMS System" {
+                background #768479
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Web Browser" {
+                shape WebBrowser
+            }
+            element "Mobile App" {
+                shape MobileDeviceLandscape
+            }
+            element "Database" {
+                shape Cylinder
+            }
+            element "Component" {
+                background #85bbf0
+                color #000000
+            }
+            element "Failover" {
+                opacity 25
+            }
+        }
+    }
+}

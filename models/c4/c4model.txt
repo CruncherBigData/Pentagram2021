@@ -27,18 +27,19 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
             }
 
             farmacyFamilySystem = softwaresystem "Farmacy Family System" "Allows engaged customers to collaborate, learn about wellness of their health and access medical providers as well as dieticiantist to provide overall good food recommendations." {
-                singlePageApplication = container "Single-Page Application" "Provides all of the Internet banking functionality to customers via their web browser." "JavaScript and Angular" "Web Browser"
-                mobileApp = container "Mobile App" "Provides a limited subset of the Internet banking functionality to customers via their mobile device." "Xamarin" "Mobile App"
-                webApplication = container "Web Application" "Delivers the static content and the Internet banking single page application." "Java and Spring MVC"
-                apiApplication = container "API Application" "Provides Internet banking functionality via a JSON/HTTPS API." "Java and Spring MVC" {
-                    signinController = component "Sign In Controller" "Allows users to sign in to the Internet Banking System." "Spring MVC Rest Controller"
-                    accountsSummaryController = component "Accounts Summary Controller" "Provides customers with a summary of their bank accounts." "Spring MVC Rest Controller"
-                    resetPasswordController = component "Reset Password Controller" "Allows users to reset their passwords with a single use URL." "Spring MVC Rest Controller"
+                singlePageApplication = container "Single-Page Application" "Provides all of the Farmacy Family functionality & hooks to 3rd party systems to engaged customers via their web browser." "JavaScript and React" "Web Browser"
+                mobileApp = container "Mobile App" "Provides a limited subset of the Farmacy Family functionality to its engaged customers via their mobile device." "React Native" "Mobile App"
+                webApplication = container "Web Application" "Delivers the static content and the Farmacy Family single page application." "Spring Boot MVC"
+                apiApplication = container "API Application" "Provides Farmacy Family functionality via a HTTPS protocol (supports JSON communication style only)." "Spring Boot MVC" {
+                    signinController = component "Sign In Controller" "Allows users to sign in to the Farmacy Family System." "Spring Boot MVC Rest Controller"
+                    communityEngagementController = component "Community Engagement Controller" "Provides customers with a list of options to engagege with farmacy family community." "Spring MVC Rest Controller"
+                    medicalProviderController = component "Medical provider Controller" "Medical Provider Engagement using medical System Integration (eDietition, Medical Provider)" "Spring MVC Rest Controller"
+                    communityEngagementService = component "Community Engagement Service Facade" "Facade to provides integration with the CMS System" "Spring Bean"
+                    medicalProviderService = component "Medical Provider System Integration Service Facade" "Facade to provides integration with the medical System" "Spring Bean"
                     securityComponent = component "Security Component" "Provides functionality related to signing in, changing passwords, etc." "Spring Bean"
-                    mainframeBankingSystemFacade = component "Mainframe Banking System Facade" "A facade onto the mainframe banking system." "Spring Bean"
                     emailComponent = component "E-mail Component" "Sends e-mails to users." "Spring Bean"
                 }
-                database = container "Database" "Stores user registration information, hashed authentication credentials, access logs, etc." "Oracle Database Schema" "Database"
+                database = container "Database" "Stores user registration information, user prefrences, access logs, etc." "Postgress Database Schema" "Database"
             }
             
         }
@@ -68,6 +69,79 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
         mlTrainer -> mlModelStore "ML models gets stored in the ML Storage"
         analyticProcessor -> mlModelStore "Analytucs Processor gets input from request and generates analytics using ML models"
         
+         # relationships for farmacyFamilySystem Container
+        customer -> webApplication "Visits farmacyfamily.com using" "HTTPS"
+        customer -> singlePageApplication "Uses it to engage with Farmacy Family Platform (community & medical advise engagements)"
+        customer -> mobileApp "Able to Engage with Medical Providers and with teh Community"
+        dietician -> mobileApp "Dietician Access to the Famacy Family System"
+        dietician -> webApplication "Dietician Access to the Famacy Family System"
+        dietician -> singlePageApplication "Dietician Access to the Famacy Family System"
+        webApplication -> singlePageApplication "Delivers to the customer's web browser"
+        mobileApp -> apiApplication "Delivers to the customer's web browser"
+        singlePageApplication -> apiApplication "Delivers to the customer's web browser"
+        apiApplication -> database "Reads from and writes to" "JDBC"
+         
+        # relationships to/from farmacyFamilySystem components
+        singlePageApplication -> signinController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> communityEngagementController "Makes API calls to" "JSON/HTTPS"
+        singlePageApplication -> medicalProviderController "Makes API calls to" "JSON/HTTPS"
+        mobileApp -> signinController "Makes API calls to" "JSON/HTTPS"
+        mobileApp -> communityEngagementController "Makes API calls to" "JSON/HTTPS"
+        mobileApp -> medicalProviderController "Makes API calls to" "JSON/HTTPS"
+        signinController -> securityComponent "Uses"
+        communityEngagementController -> communityEngagementService "Uses"
+        communityEngagementService -> cmsSystem  "Makes API calls to" "XML/HTTPS"
+        medicalProviderController -> medicalProviderService "Uses"
+        medicalProviderService -> medicalSystem  "Makes API calls to" "XML/HTTPS"
+        securityComponent -> database "Reads from and writes to" "JDBC"
+        communityEngagementService -> emailComponent "Sends e-mail using"        
+        medicalProviderService -> emailComponent "Sends e-mail using" 
+        emailComponent -> notificationSystem "Different type of notifications platform supports eMail/Push/SMS/InApp"
+
+        #Deployment
+        deploymentEnvironment "Production" {
+            deploymentNode "Customer's mobile device" "" "Apple iOS or Android" {
+                liveMobileAppInstance = containerInstance mobileApp
+            }
+            deploymentNode "Customer's computer" "" "Microsoft Windows or Apple macOS" {
+                deploymentNode "Web Browser" "" "Chrome, Firefox, Safari, or Edge" {
+                    liveSinglePageApplicationInstance = containerInstance singlePageApplication
+                }
+            }
+
+            deploymentNode "Farmacy Family System" "" "Farmacy Family System data center" {
+                deploymentNode "farmacyFamily-web***" "" "Ubuntu 16.04 LTS" "" 4 {
+                    deploymentNode "Spring Boot Embedded App Server" "" "Apache Tomcat 8.x" {
+                        liveWebApplicationInstance = containerInstance webApplication
+                    }
+                }
+                deploymentNode "farmacyFamily-api***" "" "Ubuntu 16.04 LTS" "" 8 {
+                    deploymentNode "Spring Boot Embedded App Server" "" "Apache Tomcat 8.x" {
+                        liveApiApplicationInstance = containerInstance apiApplication
+                    }
+                }
+
+                deploymentNode "farmacyFamily-db01" "" "Ubuntu 16.04 LTS" {
+                    primaryDatabaseServer = deploymentNode "Posgres - Primary" "" "AWS RDS - Postgres 12.8" {
+                        livePrimaryDatabaseInstance = containerInstance database
+                    }
+                }
+                deploymentNode "farmacyFamily-db02" "" "Ubuntu 16.04 LTS" "Failover" {
+                    secondaryDatabaseServer = deploymentNode "Posgres - Secondary" "" "AWS RDS - Postgres 12.8" "Failover" {
+                        liveSecondaryDatabaseInstance = containerInstance database "Failover"
+                    }
+                }
+                deploymentNode "farmacyFamily-cms-system-prod001" "" "" "" {
+                    softwareSystemInstance cmsSystem
+                }
+                deploymentNode "farmacyFamily-medical-system-prod001" "" "" "" {
+                    softwareSystemInstance medicalSystem
+                }                
+            }
+
+            primaryDatabaseServer -> secondaryDatabaseServer "Replicates data to"
+        }
+        
     }
 
     views {
@@ -84,7 +158,7 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
             autoLayout
         }
         
-        container analyticsSystem "Containers" {
+        container analyticsSystem "ASContainers" {
             include *
             animation {
                 dataSources
@@ -93,6 +167,42 @@ workspace "Farmacy Family System" "Farmacy Family System View." {
             autoLayout
         }        
 
+        container farmacyFamilySystem "FFContainers" {
+            include *
+            animation {
+                customer
+                webApplication
+                singlePageApplication
+                mobileApp
+                apiApplication
+                database
+            }
+            autoLayout
+        }
+        
+        component apiApplication "Components" {
+            include *
+            animation {
+                singlePageApplication mobileApp database notificationSystem medicalSystem cmsSystem
+                signinController securityComponent
+                communityEngagementController communityEngagementService
+                 medicalProviderController medicalProviderService            
+            }
+            autoLayout
+        }
+
+
+        deployment farmacyFamilySystem "Production" "ProdDeployment" {
+            include *
+            animation {
+                liveSinglePageApplicationInstance
+                liveMobileAppInstance
+                liveWebApplicationInstance liveApiApplicationInstance
+                livePrimaryDatabaseInstance
+                liveSecondaryDatabaseInstance
+            }
+            autoLayout
+        }
 
         styles {
             element "Person" {

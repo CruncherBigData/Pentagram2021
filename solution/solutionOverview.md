@@ -77,3 +77,19 @@ It is the intenral view of how we think Farmacy Data Lake plarform will look lik
 <hr/>
 
 #### **Farmacy Family System Container Diagram**
+![](../images/structurizr-FFContainers.png)
+![](../images/structurizr-FFContainers-key.png)
+
+<hr/>
+
+#### **Farmacy Family System Component Diagram**
+![](../images/structurizr-FFComponents.png)
+![](../images/structurizr-FFComponents-key.png)
+
+<hr />
+
+#### **Farmacy Family System Deployment Diagram**
+![](../images/structurizr-ProdDeployment.png)
+![](../images/structurizr-ProdDeployment-key.png)
+
+<hr/>
