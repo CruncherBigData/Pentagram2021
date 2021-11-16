@@ -35,7 +35,7 @@ Its the fastest friendship we have ever made, just a week ago we did not know ea
 - [Solution](solution/README.md)
 	- [Solution Overview](solution/solutionOverview.md)
 	- [Tradeoffs](solution/tradeoffs.md)
-	- [ADR's](solution/adrs.md)
+	- [ADR's](ADRs/README.md)
 - [Views](/3.views/Readme.md)
 	- Sequence Diagrams
 	- Data Models
