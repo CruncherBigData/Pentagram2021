@@ -23,6 +23,7 @@ Its the fastest friendship we have ever made, just a week ago we did not know ea
 - [www.DeveloperToArchitect.com](https://www.developertoarchitect.com/)
 
 ## Table of Content
+- [Video](https://intuit.box.com/s/m7nz9jzx2m9jflz36qn4en93l13riqbc)
 - [Introduction](introduction.md)	
 - [Glossary](glossary.md)
 - [Use Case Analysis](problem/usecases.md)
